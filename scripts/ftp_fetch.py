@@ -10,9 +10,14 @@ argv = sys.argv
 print argv[1]
 ftp = ftplib.FTP('ftp.sec.gov', 'anonymous','')
 path = 'edgar/full-index/' + argv[1] + '/QTR' + argv[2]
+resource_path = os.pardir + '/resources'
 year_path = os.pardir + '/resources/' + argv[1]
 local_path = os.pardir + '/resources/' + argv[1] + '/QTR' + argv[2]
 local_file = local_path + '/company.idx'
+try:
+  os.stat(resource_path)
+except:
+  os.mkdir(resource_path)
 try:
   os.stat(year_path)
 except:
