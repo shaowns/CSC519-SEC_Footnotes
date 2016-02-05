@@ -69,14 +69,14 @@ with open(local_file, 'r') as f:
 #fetch required filing from ftp server
 try:
   filing_path = company_dict[company]['10-Q']
-  file_name = company.lower().replace(' ','_')
+  file_name = company.lower().replace(' ','_') + '.htm'
   document = local_path + '/' + file_name
-  print document
   try:
     os.stat(document)
+    print "filing document already retrieved"
   except:
-    print "filing document created"
     ftp.cwd("~/")
     ftp.retrbinary("RETR " + filing_path, open(document, 'wb').write)
+    print "filing document created"
 except:
   print company + " : No filing found"
