@@ -1,1 +1,1 @@
-# CSC519-SEC_Footnotes
+# CSC591-SEC_Footnotes
