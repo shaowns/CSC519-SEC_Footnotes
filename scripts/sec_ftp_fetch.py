@@ -17,9 +17,11 @@ qtr = argv[3]
 ftp = ftplib.FTP('ftp.sec.gov', 'anonymous','')
 path = 'edgar/full-index/' + year + '/QTR' + qtr
 resource_path = os.pardir + '/resources/'
-year_path = resource_path + year
-local_path = year_path + '/QTR' + qtr
-local_file = local_path + '/company.idx'
+file_prefix = year + '_q' + qtr + '_'
+idx_file_name = file_prefix + 'company.idx'
+idx_path = resource_path + '/idx' 
+idx_file_path = idx_path + '/' + idx_file_name
+doc_path = resource_path + '/doc'
 
 #make resources directory if not found
 
@@ -28,34 +30,34 @@ try:
 except:
   os.mkdir(resource_path)
 
-#make directory for year if not found
+#make idx directory if not found
 
 try:
-  os.stat(year_path)
+  os.stat(idx_path)
 except:
-  os.mkdir(year_path)
+  os.mkdir(idx_path)
 
-#make directory for quarter if not found
+#make doc directory if not found
 
 try:
-  os.stat(local_path)
+  os.stat(doc_path)
 except:
-  os.mkdir(local_path)
+  os.mkdir(doc_path)
 
 ftp.cwd(path)
 
 #fetch file from ftp server if not found
 
 try:
-  os.stat(local_file)
+  os.stat(idx_file_path)
 except:
-  ftp.retrbinary("RETR " + 'company.idx',open(local_file, 'wb').write)
+  ftp.retrbinary("RETR " + 'company.idx',open(idx_file_path, 'wb').write)
 
 company_dict = {}
 
 #read from .idx file and create dictionary
 
-with open(local_file, 'r') as f:
+with open(idx_file_path, 'r') as f:
   for _ in xrange(10):
     next(f)
   for line in f:
@@ -71,7 +73,7 @@ with open(local_file, 'r') as f:
 try:
   filing_path = company_dict[company]['10-Q']
   file_name = company.lower().replace(' ','_') + '.htm'
-  document = local_path + '/' + file_name
+  document = doc_path + '/' + file_prefix + file_name
   try:
     os.stat(document)
     print "filing document already retrieved"
