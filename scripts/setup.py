@@ -11,5 +11,6 @@ setup(name='sec_ftp_fetch',
       license='MIT',
       install_requires=[
 	'beautifulsoup4',
+	'MySQL-python',
 	],
       zip_safe=False)
