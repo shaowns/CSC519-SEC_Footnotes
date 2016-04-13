@@ -3,6 +3,7 @@
 import os
 import re
 from bs4 import BeautifulSoup, SoupStrainer
+from unidecode import unidecode
 
 doc_path = "../resources/doc/"
 cur_doc = ""
@@ -18,7 +19,7 @@ prefixes = ('f_', 'm_')
 for doc_name in doc_array[:]:
 	if doc_name.startswith(prefixes):
 		doc_array.remove(doc_name)
-for doc_name in doc_array:
+for doc_name in doc_array[:]:
 	if cur_doc != "":
 		os.remove(cur_doc)
 	cur_doc = doc_path+doc_name

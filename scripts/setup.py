@@ -12,5 +12,7 @@ setup(name='sec_ftp_fetch',
       install_requires=[
 	'beautifulsoup4',
 	'MySQL-python',
+	'unidecode',
+	'html2text',
 	],
       zip_safe=False)
