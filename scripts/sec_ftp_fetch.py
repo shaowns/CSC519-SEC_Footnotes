@@ -50,6 +50,9 @@ ftp.cwd(path)
 
 try:
   os.stat(idx_file_path)
+  if os.stat(idx_file_path).st_size < ftp.size('company.idx'):
+    os.remove(idx_file_path)
+    raise Exception("incomplete idx file: %s" % idx_file_path)
 except:
   ftp.retrbinary("RETR " + 'company.idx',open(idx_file_path, 'wb').write)
 
@@ -70,17 +73,22 @@ with open(idx_file_path, 'r') as f:
       continue
 
 #fetch required filing from ftp server
+
+file_name = company.lower().replace(' ','_') + '.htm'
+
 try:
   filing_path = company_dict[company]['10-Q']
-  file_name = company.lower().replace(' ','_') + '.htm'
   document = doc_path + '/' + file_prefix + file_name
   try:
-    os.stat(document)
-    print "filing document already retrieved"
-  except:
     ftp.cwd("~/")
+    os.stat(document)
+    if os.stat(document).st_size < ftp.size(filing_path):
+      os.remove(document)
+      raise Exception("Incomplete filing document : %s\n" % document)
+    print "filing document %s already retrieved" % document
+  except:
     ftp.retrbinary("RETR " + filing_path, open(document, 'wb').write)
-    print "filing document created"
+    print "filing document %s created" % document
   htm_data = ""
   print "title:"
   with open(document, 'r') as f:
@@ -88,4 +96,4 @@ try:
   soup = BeautifulSoup(htm_data, 'html.parser')
   print soup.title
 except:
-  print company + " : No filing found"
+  print file_prefix+file_name + " : No filing found"
