@@ -7,6 +7,7 @@
 import sys
 import os
 import ftplib
+import re
 
 argc = len(sys.argv)
 argv = sys.argv
@@ -60,23 +61,25 @@ company_dict = {}
 #read from .idx file and create dictionary
 
 with open(idx_file_path, 'r') as f:
-  for _ in xrange(10):
-    next(f)
-  for line in f:
-    output = [s.strip() for s in line.split('  ') if s]
-    output[0] = output[0].lower()
-    if output[1] == '10-Q':
-      company_dict[output[0]] = {}
-      company_dict[output[0]][output[1]] = output[4]
-    else:
-      continue
+	for _ in xrange(10):
+		next(f)
+	for line in f:
+		output = [s.strip() for s in line.split('  ') if s]
+		output[0] = output[0].lower()
+		output[0] = re.sub('[,./]', '', output[0])
+		if output[1] == '10-Q' or output[1] == '10-K':
+			company_dict[output[0]] = {}
+			company_dict[output[0]]['doc'] = output[4]
+		else:
+			continue
 
 #fetch required filing from ftp server
 
+company = re.sub('[,./]', '', company)
 file_name = company.lower().replace(' ','_') + '.htm'
 
 try:
-  filing_path = company_dict[company]['10-Q']
+  filing_path = company_dict[company]['doc']
   document = doc_path + '/' + file_prefix + file_name
   try:
     ftp.cwd("~/")
