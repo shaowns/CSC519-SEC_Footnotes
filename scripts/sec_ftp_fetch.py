@@ -7,7 +7,6 @@
 import sys
 import os
 import ftplib
-from bs4 import BeautifulSoup
 
 argc = len(sys.argv)
 argv = sys.argv
@@ -93,7 +92,5 @@ try:
   print "title:"
   with open(document, 'r') as f:
     htm_data = f.read().replace('\n','')
-  soup = BeautifulSoup(htm_data, 'html.parser')
-  print soup.title
 except:
   print file_prefix+file_name + " : No filing found"

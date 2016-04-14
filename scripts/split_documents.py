@@ -3,7 +3,6 @@
 import os
 import re
 from bs4 import BeautifulSoup, SoupStrainer
-from unidecode import unidecode
 
 doc_path = "../resources/doc/"
 cur_doc = ""
@@ -46,11 +45,11 @@ for doc_name in doc_array[:]:
 		os.stat(cur_doc_f)
 	except:
 		with open(cur_doc_f, 'w') as fn:
-			fn.write(target_html)
+			fn.write(u'%s' % target_html)
 	with open(cur_doc, 'r') as ifile, open(cur_doc_m, 'w') as ofile:
-		ofile.write(ifile.read(start-1))
+		ofile.write(u'%s' % ifile.read(start-1).encode("utf8"))
 		ifile.seek(end)
-		ofile.write(ifile.read())
+		ofile.write(u'%s' % ifile.read().encode("utf8"))
 if cur_doc != "":
 	os.remove(cur_doc)
 
