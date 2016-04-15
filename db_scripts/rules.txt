@@ -1,0 +1,27 @@
+acquire_cash,0
+Acquire_Crule,0
+acquire_financial,0
+collateral_security_borrower,0
+decrease_debt,0
+decrease_loss,0
+Decrease_Profit,0
+decrease_tax,0
+financial_agency_consistent,1
+financial_consistent_otheragency,1
+financial_inconsistent_agency, 1
+financial_inconsistent_otheragency,1
+Financial_Mgt_Transform_Financial,0
+increase_debt,0
+Increase_Loss,0
+Increase_Profit,0
+increase_tax,0
+mfls,0
+security_finance_risk,0
+security_invest_financial,0
+transform_client,0
+transform_debt,0
+transform_investor,0
+transform_management_consistent,0
+transform_org_segment,0
+transform_subject1,0
+transform_tax,0

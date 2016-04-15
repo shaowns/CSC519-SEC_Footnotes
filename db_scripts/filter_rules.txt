@@ -1,0 +1,9 @@
+Investment - Decrease_Profit, Increase_Loss, Increase_Profit, decrease_loss,decrease_debt, increase_debt, transform_debt
+Policies - financial_agency_consistent, financial_consistent_otheragency,financial_inconsistent_agency, financial_inconsistent_otheragency,Financial_Mgt_Transform_Financial, mfls, transform_client, transform_investor,transform_management_consistent, transform_org_segment, transform_subject1
+Tax - transform_tax, decrease_tax, increase_tax
+Debt - decrease_debt, increase_debt, transform_debt
+Profit - Increase_Profit, decrease_loss
+Loss - Decrease_Profit, Increase_Loss
+Merger/Acquisition - acquire_cash, Acquire_Crule, acquire_financial
+Risk assessment - security_finance_risk
+Revenue - collateral_security_borrower, transform_tax, decrease_tax,increase_tax, decrease_debt, increase_debt, transform_debt,Financial_Mgt_Transform_Financial, security_invest_financial
