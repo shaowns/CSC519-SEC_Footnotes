@@ -12,9 +12,12 @@ next_link = ""
 file_content = ""
 start = 0
 end = 0
-link_match = re.compile(r"^[nN]otes(?: to)(?: [a-zA-Z]*)(?: [sS]tatements)")
+
+link_match = re.compile(r"^Notes(?: to)([\sa-zA-Z]*)(Statements)$")
+
 doc_array = os.listdir(doc_path)
 prefixes = ('f_', 'm_')
+
 for doc_name in doc_array[:]:
 	if doc_name.startswith(prefixes):
 		doc_array.remove(doc_name)
@@ -26,14 +29,25 @@ for doc_name in doc_array[:]:
 	cur_doc_m = doc_path + "m_" + doc_name
 	with open(cur_doc, 'r') as f:
 		file_content = f.read()
-		for link in BeautifulSoup(file_content, "html.parser", parse_only=SoupStrainer('a')):
+		links = BeautifulSoup(file_content, "html5lib").find_all('a')
+		for link in links:
 			if actual_link == "" and link.has_attr('href') and link['href'] != toc:
-				if link_match.match(link.contents[0].strip()):
+				if link_match.match(link.text.strip().encode('ascii','ignore')):
+					print link
 					actual_link = link['href'][1:]
+					print actual_link
 			else:
 				if next_link == "" and link.has_attr('href') and link['href'] != toc:
 					next_link = link['href'][1:]
 		footnote_start_pattern = r'<a name="%s"></a>' % actual_link
+		next_flag = 0
+		for link in links:
+			if next_flag == 1:
+				next_link = link['name']
+				break
+			else:
+				if link.has_attr('name') and link['name'] == actual_link:
+					next_flag = 1
 		footnote_end_pattern = r'<a name="%s"></a>' % next_link
 		footnote_start_match = re.search(footnote_start_pattern, file_content, re.IGNORECASE)
 		footnote_end_match = re.search(footnote_end_pattern, file_content, re.IGNORECASE)
