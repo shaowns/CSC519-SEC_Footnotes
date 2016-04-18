@@ -34,22 +34,22 @@ for doc_name in doc_array[:]:
 			if actual_link == "" and link.has_attr('href') and link['href'] != toc:
 				if link_match.match(link.text.strip().encode('ascii','ignore')):
 					print link
-					actual_link = link['href'][1:]
+					actual_link = link['href'][1:].encode('ascii', 'ignore')
 					print actual_link
 			else:
 				if next_link == "" and link.has_attr('href') and link['href'] != toc:
 					next_link = link['href'][1:]
 		footnote_start_pattern = r'<a name="%s">' % actual_link
 		next_flag = 0
-		file_content = file_content.replace('<A NAME="%s">' % actual_link,'<A NAME="%s">%s' % (actual_link, "a02506b31c1cd46c2e0b6380fb94eb3d"))
+		file_content = file_content.replace('<A NAME="%s"></A>' % actual_link,'<A NAME="%s">%s</A>' % (actual_link, "1acbf042c3fe4cc920e075f47dceca01"))
 		for link in links:
 			if next_flag == 1 and link.has_attr('name'):
-				next_link = link['name']
+				next_link = link['name'].encode('ascii', 'ignore')
 				break
 			else:
 				if link.has_attr('name') and link['name'] == actual_link:
 					next_flag = 1
-		file_content = file_content.replace('<A NAME="%s">' % next_link,'<A NAME="%s">%s' % (next_link, "a02506b31c1cd46c2e0b6380fb94eb3d"))
+		file_content = file_content.replace('<A NAME="%s"></A>' % next_link,'<A NAME="%s">%s</A>' % (next_link, "b73a4f109926f7ba8c2f646b0fbd6a62"))
 		#footnote_end_pattern = r'<a name="%s"></a>' % next_link
 		#footnote_start_match = re.search(footnote_start_pattern, file_content, re.IGNORECASE)
 		#footnote_end_match = re.search(footnote_end_pattern, file_content, re.IGNORECASE)
@@ -62,6 +62,9 @@ for doc_name in doc_array[:]:
 	#except:
 	with open(cur_doc, 'w') as fn:
 		fn.write(file_content)
+	actual_link=""
+	next_link=""
+	next_flag=0
 	#with open(cur_doc, 'r') as ifile, open(cur_doc_m, 'w') as ofile:
 	#	ofile.write(ifile.read(start))
 	#	ifile.seek(end)
