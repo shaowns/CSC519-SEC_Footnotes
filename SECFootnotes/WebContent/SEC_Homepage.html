@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SEC Footnotes Analyzer</title>
+	
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+    <!-- Loading Flat UI -->
+    <link href="dist/css/flat-ui.css" rel="stylesheet">
+    <link href="docs/assets/css/demo.css" rel="stylesheet">
+
+    <!--link rel="shortcut icon" href="img/favicon.ico"-->
+    <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII=" rel="icon" type="image/x-icon" />
+
+	<script type="text/javascript">function appendURL() {
+		
+		var c = document.getElementById("company_name")
+		var y = document.getElementById("year")
+		var q = document.getElementById("quarter")
+		var strComp = c.options[c.selectedIndex].text
+		var strY = y.options[y.selectedIndex].text
+		var strQ = q.options[q.selectedIndex].text
+		var text = '#' + strComp + '?' + strY + '$' + strQ
+		window.location.href = 'SEC_Filters.html'+ text
+	}</script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="dist/js/vendor/html5shiv.js"></script>
+      <script src="dist/js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+    <div class="container">
+      <div class="demo-headline">
+        <h1 class="demo-section-title">
+          SEC Footnotes Analyzer
+        </h1>
+      </div> <!-- /demo-headline -->
+	
+
+      <h3 class="demo-panel-title" align="center">Which notes do you want to analyze?</h3>
+
+      <div class="row" align="center">
+        <div  class="col-xs-4">
+          <h3 class="demo-panel-title">Select Company</h3>
+          <select id = "company_name" class="form-control select select-primary" data-toggle="select">
+            <option value="0" selected>Choose Company</option>
+            <option value="1">AMAZON COM INC</option>
+            <option value="2">MICROSOFT CORP</option>
+            <option value="3">NETFLIX INC</option>
+            <option value="4">ORACLE CORP</option>
+            <option value="5">SALESFORCE COM INC</option>
+            <option value="6">SYMANTEC CORP</option>
+            <option value="7">TWITTER, INC.</option>
+            <option value="5">YAHOO INC</option>
+          </select>
+        </div> <!-- /.col-xs- -->
+        <div class="col-xs-4">
+          <h3 class="demo-panel-title">Select Year</h3>
+          <select id= "year" class="form-control select select-primary" data-toggle="select">
+            <option value="0" selected>Choose Year</option>
+            <option value="1">2012</option>
+            <option value="2">2013</option>
+            <option value="3">2014</option>
+            <option value="4">2015</option>
+            <option value="5">2016</option>
+          </select>
+        </div> <!-- /.col-xs-3 -->
+ 		<div class="col-xs-4">
+          <h3 class="demo-panel-title">Select Form</h3>
+          <select id = "quarter" class="form-control select select-primary" data-toggle="select">
+            <option value="0" selected>Choose Form</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div> <!-- /.col-xs-3 -->
+      </div> <!-- /.row -->
+      
+
+      <br/>
+      <br/>
+      <div class="row demo-row" align="center">
+        <div align="center" style="width: 300px">
+          <a href="#" class="btn btn-block btn-lg btn-primary" onclick = "appendURL()">Continue</a>
+        </div>
+      </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+    <script src="dist/js/vendor/jquery.min.js"></script>
+    <script src="dist/js/vendor/video.js"></script>
+    <script src="dist/js/flat-ui.min.js"></script>
+    <script src="docs/assets/js/application.js"></script>
+
+    <script>
+      videojs.options.flash.swf = "dist/js/vendors/video-js.swf"
+    </script>
+  </body>
+</html>

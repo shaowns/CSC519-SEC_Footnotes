@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SEC Footnotes Analyzer Homepage</title>
+    <meta name="description" content="SEC Footnotes Analyzer to better understand the consolidated financial statements."/>
+
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="dist/js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="dist/js/flat-ui.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+    <!-- Loading Flat UI -->
+    <link href="dist/css/flat-ui.css" rel="stylesheet">
+    <link href="docs/assets/css/demo.css" rel="stylesheet">
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('select').selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});
+      });
+    </script>
+    <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII=" rel="icon" type="image/x-icon" />
+
+    <!--<link rel="shortcut icon" href="#">-->
+
+  </head>
+  <body>
+
+  	<div class="container">
+      <div class="demo-headline">
+        <h1 class="demo-section-title">
+          SEC Footnotes Analyzer
+        </h1>
+      </div> <!-- /demo-headline -->
+
+
+      <h3 class="demo-panel-title" align="center">Which notes do you want to analyze?</h3>
+
+
+      <div class="row" align="center" style="width: 1300px">
+        <div class="col-xs-5">
+         <h3 class="demo-panel-title">Select Company</h3>
+          <select class="form-control select select-primary" data-toggle="select">
+            <option value="0" selected>Choose Company</option>
+            <option value="1">AMAZON COM INC</option>
+            <option value="2">MICROSOFT CORP</option>
+            <option value="3">NETFLIX INC</option>
+            <option value="4">ORACLE CORP</option>
+            <option value="5">SALESFORCE COM INC</option>
+            <option value="6">SYMANTEC CORP</option>
+            <option value="7">TWITTER, INC.</option>
+            <option value="5">YAHOO INC</option>
+          </select> 
+        </div> <!-- /.col-xs-3 -->
+        <div class="col-xs-3">
+          <h3 class="demo-panel-title">Select Year</h3>
+          <select data-toggle="select">
+            <!--style="height: 50px; color: #ffffff; background-color: #1abc9c;"-->
+            <option value="0" selected >Choose Year</option>
+            <option value="1">2012</option>
+            <option value="2">2013</option>
+            <option value="3">2014</option>
+            <option value="4">2015</option>
+            <option value="5">2016</option>
+          </select> 
+        </div> <!-- /.col-xs-3 -->
+      </div> <!-- /.row -->
+
+
+      <br/>
+      <div align="center" style="width: 300px; margin-left: 330px;">
+        <div align="center">
+          <a href="#fakelink" class="btn btn-block btn-lg btn-primary">Continue</a>
+        </div>
+      </div> <!-- /row -->
+    </div><!-- /.container -->
+
+    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+    <script src="assets/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="assets/js/vendor/video.js"></script>
+    <script src="assets/js/flat-ui.min.js"></script>
+    
+  </body>
+</html>

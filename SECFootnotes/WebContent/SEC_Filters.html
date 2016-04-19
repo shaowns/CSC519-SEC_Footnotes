@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SEC Footnotes Analyzer</title>
+
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="dist/css/flat-ui.css" rel="stylesheet">
+    <link href="docs/assets/css/demo.css" rel="stylesheet">
+
+    <!--link rel="shortcut icon" href="img/favicon.ico"-->
+    <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII=" rel="icon" type="image/x-icon" />
+
+	<script type="text/javascript">
+	function getFromURL(){
+		
+		year = window.location.hash.substring(2)
+		text = '#' + year
+		window.location.href = 'SEC_Homepage.html'+ text
+		
+	}
+	function servCall(){
+		var cName = window.location.hash.substring(1)
+		var q = cName.indexOf("?")
+		var perc = cName.indexOf("$")
+		var comName = cName.substring(0,q-1)
+		var year = cName.substring(q+1, perc-1)
+		var quarter = cName.substring(perc+1, cName.length)
+		var values = ""
+		var highlight
+		var anti_rule
+		var flag_rule
+		if(document.getElementById("checkbox11").checked)
+			{
+				highlight = "on"
+			}
+		else highlight = "off";
+		if(document.getElementById("checkbox12").checked)
+		{
+			flag_rule = "on"
+		}
+		else flag_rule = "off";
+		if(document.getElementById("checkbox11").checked)
+		{
+			anti_rule = "on"
+		}
+		else anti_rule = "off";
+	
+		
+		for(var i = 1 ; i<=10 ; i++)
+			{
+			if(document.getElementById("checkbox"+i).checked)
+				values = values + ',' + document.getElementById("checkbox"+i).value
+			}
+		document.location.href = "/SECFootnotes/companyDetails?cName="+comName+"&year="+year+"&quarter="+ quarter +"&values="+values + "&highlight="+highlight+"&anti_rule="+anti_rule+"&flag_rule="+flag_rule;
+		
+	}
+	
+    </script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="dist/js/vendor/html5shiv.js"></script>
+      <script src="dist/js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="demo-headline">
+        <h1 class="demo-section-title">
+          SEC Footnotes Analyzer
+        </h1>
+      </div> <!-- /demo-headline -->
+
+      <h3 class="demo-panel-title" align="center">Which filters do you want to analyze on?</h3>
+
+      <div class="row">
+        <div class="col-xs-3">
+          <h3 class="demo-panel-title" align="center" style="width: 920px">Select Filters</h3>
+        </div>
+        <br/><br/>
+        <div class="col-xs-4">
+          <label class="checkbox" for="checkbox1">
+            <input type="checkbox" value="Investment" id="checkbox1" data-toggle="checkbox">
+            Investment
+          </label>
+          <label class="checkbox" for="checkbox2">
+            <input type="checkbox" value="Policies" id="checkbox2" data-toggle="checkbox">
+            Policies
+          </label>
+          <label class="checkbox" for="checkbox3">
+            <input type="checkbox" value="Tax" id="checkbox3" data-toggle="checkbox">
+            Tax
+          </label>
+          <label class="checkbox" for="checkbox4">
+            <input type="checkbox" value="Debt" id="checkbox4" data-toggle="checkbox">
+            Debt
+          </label>
+          <label class="checkbox" for="checkbox5">
+            <input type="checkbox" value="Profit" id="checkbox5" data-toggle="checkbox">
+            Profit
+          </label>
+        </div>
+        <div class="col-xs-3">
+          <label class="checkbox" for="checkbox6">
+            <input type="checkbox" value="Loss" id="checkbox6" data-toggle="checkbox">
+            Loss
+          </label>
+          <label class="checkbox" for="checkbox7">
+            <input type="checkbox" value="Acquisitions" id="checkbox7" data-toggle="checkbox">
+            Acquisitions
+          </label>
+          <label class="checkbox" for="checkbox8">
+            <input type="checkbox" value="Equity" id="checkbox8" data-toggle="checkbox">
+            Equity
+          </label>
+          <label class="checkbox" for="checkbox9">
+            <input type="checkbox" value="Risk assessment" id="checkbox9" data-toggle="checkbox">
+            Risk assessment
+          </label>
+          <label class="checkbox" for="checkbox10">
+            <input type="checkbox" value="Revenue" id="checkbox10" data-toggle="checkbox">
+            Revenue
+          </label>
+        </div> <!-- /checkboxes col-xs-3 -->
+
+      <br/><br/>
+      <div class="row">
+        <div class="col-xs-3">
+        <h3 class="demo-panel-title" align="center" style="width: 950px">Type of results</h3>
+        </div>
+        <br/><br/>
+      </div>
+      <div class="row" align="center" style="width: 1000px">
+        <div class="col-xs-5">
+                <input type="checkbox" values="Filter" checked data-toggle="switch" id="checkbox11" />
+                Highlight Filtered Sentences
+        </div>
+        <div class="col-xs-3">
+                <input type="checkbox" values="Flag" data-toggle="switch" id="checkbox12" />
+                Flag rules
+        </div>
+        <div class="col-xs-3">
+                <input type="checkbox" value="Anti" data-toggle="switch" id="checkbox13" />
+                Anti rules
+        </div>
+        </div> <!-- /radios col-xs-3 -->
+      </div>
+
+      <br/><br/>
+      <div class="row demo-row" align="center">
+        <div align="center" style="width: 300px">
+          <a href="#" class="btn btn-block btn-lg btn-primary" onclick= "servCall()">Get Results</a>
+        </div>
+      </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+
+    <script src="dist/js/vendor/jquery.min.js"></script>
+    <script src="dist/js/vendor/video.js"></script>
+    <script src="dist/js/flat-ui.min.js"></script>
+    <script src="docs/assets/js/application.js"></script>
+
+    <script>
+      videojs.options.flash.swf = "dist/js/vendors/video-js.swf"
+    </script>
+  </body>
+</html>
