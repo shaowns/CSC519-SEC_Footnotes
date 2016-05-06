@@ -47,7 +47,7 @@ public class companyDetails extends HttpServlet {
 		String cName = request.getParameter("cName");
 		int year = Integer.parseInt(request.getParameter("year"));
 		int quarter = Integer.parseInt(request.getParameter("quarter"));
-		String anti_flag = request.getParameter("anti_flag");
+		String anti_flag = request.getParameter("anti_rule");
 		String flag_rule = request.getParameter("flag_rule");
 		String highlight = request.getParameter("highlight");
 		String values = request.getParameter("values").substring(1);
@@ -214,32 +214,39 @@ public class companyDetails extends HttpServlet {
 //			e.printStackTrace();
 //		}
 		
-		pw.println("<html><head><h1><b><i><center>Results - SEC Footnotes</center></i></b></h1></head></html>");
+		pw.println("<html><head>");
+		pw.println("<link href='" + request.getContextPath() +"/dist/css/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'><link href='" + request.getContextPath() +"/dist/css/flat-ui.css' rel='stylesheet'><link href='" + request.getContextPath() +"/docs/assets/css/demo.css' rel='stylesheet'>");
+		pw.println("<h2 demo-section-title><center>Results - SEC Footnotes</center></h2></head></html>");
 		pw.println("<body>");
 		
 		if(highlight.equalsIgnoreCase("on")){
-			pw.println("<table border = 10 align = center><tr>");
-			pw.println("<td><ul><li>Filter</li><li>Offset, Offset Data</li></ul></td>");
-			pw.println("<td><ul><li>Filter</li><li>Offset, Negated Data</li></ul></td>");
+			pw.println("<h3 demo-panel-title><center>Validated Rules Hits<center></h3>");
+			pw.println("<table class='table table-striped' align = center><tr>");
+			pw.println("<td><ul><li>Filter</li><li>Offset, Footnote Data</li></ul></td>");
+			pw.println("<td><ul><li>Filter</li><li>Offset, Main Document Data</li></ul></td>");
 			pw.println("</tr>");
 			
 			for(Map.Entry<Integer, String> entry : filter_id_name.entrySet()){
-				pw.println("<tr>");				
+				//pw.println("<tr>");				
 				int id = entry.getKey();
 				String name = entry.getValue();
-				System.out.println("id = " + id);
-				System.out.println("name = "+name);
+				System.out.println("Name is: " + name);
+				System.out.println("Values is: " + values);
+				
 				//for(Map.Entry<Integer, ArrayList<Integer>> entry2 : filter_rules.entrySet()){
 				ArrayList<Integer> ruleList = filter_rules.get(id);
 				if(ruleList != null){
-					pw.println("<td>");
-					for(int rid : ruleList){						
+					
+					for(int rid : ruleList){
+						//pw.println("<tr><td>");
 					//for(Map.Entry<Integer, HashMap<Integer, String>> entry3 : footNotes_rule_data.entrySet()){
-						System.out.println("rid = "+rid);
-						System.out.println("footnote : "+mainDoc_rule_data);
+						//System.out.println("rid = "+rid);
+						//System.out.println("footnote : "+mainDoc_rule_data);
 						HashMap<Integer, String> off_data_map = footNotes_rule_data.get(rid);
+						HashMap<Integer, String> off_data_map2 = mainDoc_rule_data.get(rid);
 						System.out.println("Hashmap" + off_data_map);
-						if(off_data_map != null){		
+						if(off_data_map != null && off_data_map2 != null){
+							pw.println("<tr><td>");
 							pw.println("<ul>");
 
 							for(Map.Entry<Integer, String> entry4 : off_data_map.entrySet()){
@@ -249,32 +256,41 @@ public class companyDetails extends HttpServlet {
 								System.out.println("data" + data);
 								pw.println("<li>" + name + "</li><li>" + off +", " + data + "</li>");
 							}
-							pw.println("</ul>");
-
-						}
-						else{							
-							pw.println("<ul></ul>");
-						}
-						HashMap<Integer, String> off_data_map2 = mainDoc_rule_data.get(rid);
-						if(off_data_map2 != null){
-							pw.println("<ul>");
-
-							for(Map.Entry<Integer, String> entry4_2 : off_data_map.entrySet()){
+							pw.println("</ul></td>");
+							
+							pw.println("<td><ul>");
+							for(Map.Entry<Integer, String> entry4_2 : off_data_map2.entrySet()){
 								int off = entry4_2.getKey();
 								String data = entry4_2.getValue();
 								pw.println("<li>" + name + "</li><li>" + off +", " + data + "</li>");
 							}	
-							pw.println("</ul>");
+							pw.println("</ul><td></tr>");
+							
 
 						}
 						else{							
-							pw.println("<ul></ul>");
+							//pw.println("<tr><td><ul></ul></td></tr>");
 						}
-						
+						//pw.println("</td><td>");
+						/*HashMap<Integer, String> off_data_map2 = mainDoc_rule_data.get(rid);						
+						if(off_data_map2 != null){
+							pw.println("<td><ul>");
+							for(Map.Entry<Integer, String> entry4_2 : off_data_map2.entrySet()){
+								int off = entry4_2.getKey();
+								String data = entry4_2.getValue();
+								pw.println("<li>" + name + "</li><li>" + off +", " + data + "</li>");
+							}	
+							pw.println("</ul><td>");
+
+						}
+						else{							
+							pw.println("<td><ul></ul></td>");
+						}*/
+						//pw.println("</tr>");
 					}
-					pw.println("</td>");
+					//pw.println("</td>");
 				}
-				pw.println("</tr>");
+				//pw.println("</tr>");
 				
 			}
 			
